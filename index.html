@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">                                                <!-- utilisatoin de l'encodage en utf-8 -->    
+    <title>SNEAKER </title>  
+    <script src="/jquery-3.3.1.min.js" type='text/javascript'></script>  <!-- chargement de mon code javascript --><!-- titre de la page html -->
+    <script src="/sneakereee.js" type='text/javascript'></script>  <!-- chargement de mon code javascript -->
+    <script src="all_data.json" type="application/json"></script>        <!-- cahrgement de mes données au format json -->
+    <link   rel="stylesheet" type="text/css" href="style.css" />          <!-- Mise en forme de la page HTML -->
+  </head>
+  <body>
+    <button onclick="window.location.href='login.html';" class="favorite styled" type="button">Login</button>
+
+    <!-- titre du site -->
+    <h1>SNEAKER</h1>
+     <div class="form">
+      <button onclick="window.location.href='produit.html?idS=random';" class="favorite styled" type="button">Vous ne savez pas quelle paire vous préférez ?</button>     
+      <p>
+        <!--barre de recherche-->
+        <input  type="text" name="recherche" id="recherche" onKeyUp="rechercheMAJ()" autocomplete="off" placeholder="Rechercher"/>  
+      </p> 
+      <button id="showWishlist">Montrer la wishlist</button>   
+    </div>
+    <!-- affichage des sagas qui sont chargées en javascript -->
+    <div id="PAIRES">
+      <button id="previous">Précédent</button>
+      <button id="next">Suivant</button>
+    </div> 
+    
+  </body> 
+  <!-- <script src="wishlist.js"></script> -->
+  <script>
+
+    // Quand la page HTML est chargée
+    window.onload = function(){  
+      displayAllSneakers();
+    
+      // firstR();
+    }
+    
+  </script>
+</html>
