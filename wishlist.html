@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">                                                <!-- utilisatoin de l'encodage en utf-8 -->    
+    <title>SNEAKER </title>  
+    <script src="jquery-3.3.1.min.js" type='text/javascript'></script>  <!-- chargement de mon code javascript --><!-- titre de la page html -->
+    <script src="sneakereee.js" type='text/javascript'></script>  <!-- chargement de mon code javascript -->
+    <script src="all_data.json" type="application/json"></script>        <!-- cahrgement de mes données au format json -->
+    <link   rel="stylesheet" type="text/css" href="style.css" />          <!-- Mise en forme de la page HTML -->
+    <link   rel="stylesheet" type="text/css" href="stile.css" />          <!-- Mise en forme de la page HTML -->
+
+  </head>
+  <body>
+    <button onclick="window.location.href='index.html';" class="favorite styled" type="button">Retour</button>
+
+    <!-- titre du site -->
+    <h1>Your Sneaker </br> Wishlist</h1>
+     <div class="form">
+       
+    </div>
+    <!-- affichage des sagas qui sont chargées en javascript -->
+    <div id="wishlist"></div> 
+    
+  </body> 
+  <script>
+//     window.onload = async function() {
+//     let accountId = "testAccount";
+//     let wishlist = getWishlist(accountId);
+//     let wishlistDiv = document.getElementById("wishlist");
+//     for (let i = 0; i < wishlist.length; i++) {
+//         let sneakerId = wishlist[i];
+//         let sneakerData = await getSneakerData(sneakerId);
+
+//         // Create a div for the sneaker
+//         let sneakerDiv = document.createElement("div");
+//         sneakerDiv.className = "sneaker";
+
+
+//         // Create an img element for the sneaker image
+//         let sneakerImg = document.createElement("img");
+//         sneakerImg.src = sneakerData.attributes.image.small;
+//         sneakerDiv.appendChild(sneakerImg);
+        
+
+//         // Create a p element for the sneaker text
+//         let sneakerText = document.createElement("p");
+//         sneakerText.textContent = sneakerData.text;
+//         sneakerDiv.appendChild(sneakerText);
+
+//         // Create a button to remove the sneaker from the wishlist
+//         let removeButton = document.createElement("button");
+//         removeButton.textContent = "Effacer de la wishlist";
+//         removeButton.addEventListener("click", function() {
+//             removeFromWishlist(accountId, sneakerId);
+
+//             // Remove the sneaker div from the wishlist div
+//             wishlistDiv.removeChild(sneakerDiv);
+//         });
+//         sneakerDiv.appendChild(removeButton);
+
+//         // Add the sneaker div to the wishlist div
+//         wishlistDiv.appendChild(sneakerDiv);
+//     }
+// };
+
+// const fs = require('fs');
+
+// // Fonction pour récupérer la wishlist pour un compte spécifié
+// function getWishlist(accountId) {
+//     try {
+//         // Lire le fichier wishlist.json de manière synchrone
+//         const wishlistData = fs.readFileSync('wishlist.json', 'utf8');
+
+//         // Parse le contenu JSON pour obtenir un tableau d'identifiants de sneakers
+//         const wishlistArray = JSON.parse(wishlistData);
+
+//         // Vous pouvez ajouter des vérifications ou des filtres supplémentaires ici si nécessaire
+
+//         return wishlistArray;
+//     } catch (error) {
+//         console.error('Error reading wishlist file:', error);
+//         return []; // Retourne une liste vide en cas d'erreur
+//     }
+// }
+
+// // Exemple d'utilisation de la fonction
+// const wishlist = getWishlist(accountId);
+// console.log('Wishlist for', accountId, ':', wishlist);
+
+// window.onload = async function() {
+//     let accountId = "testAccount";
+//     let wishlist = getWishlist(accountId);
+//     let wishlistDiv = document.getElementById("wishlist");
+
+//     for (let i = 0; i < wishlist.length; i++) {
+//         let sneakerId = wishlist[i];
+//         let sneakerData = await getSneakerData(sneakerId);
+
+//         // Create a div for the sneaker
+//         let sneakerDiv = document.createElement("div");
+//         sneakerDiv.className = "sneaker";
+
+//         // Create an img element for the sneaker image
+//         let sneakerImg = document.createElement("img");
+//         sneakerImg.src = sneakerData.attributes.image.small;
+//         sneakerDiv.appendChild(sneakerImg);
+
+//         // Create a p element for the sneaker text
+//         let sneakerText = document.createElement("p");
+//         sneakerText.textContent = sneakerData.attributes.silhouette; // Mettez ici le nom ou les informations que vous souhaitez afficher
+//         sneakerDiv.appendChild(sneakerText);
+
+//         // Create a button to remove the sneaker from the wishlist
+//         let removeButton = document.createElement("button");
+//         removeButton.textContent = "Effacer de la wishlist";
+//         removeButton.addEventListener("click", function() {
+//             removeFromWishlist(accountId, sneakerId);
+
+//             // Remove the sneaker div from the wishlist div
+//             wishlistDiv.removeChild(sneakerDiv);
+//         });
+//         sneakerDiv.appendChild(removeButton);
+
+//         // Add the sneaker div to the wishlist div
+//         wishlistDiv.appendChild(sneakerDiv);
+//     }
+// };
+
+// let accountId = "testAccount";
+
+  window.onload = async function() {
+      let wishlist = await getWishlist(accountId);
+      let wishlistDiv = document.getElementById("wishlist");
+
+      for (let i = 0; i < wishlist.length; i++) {
+          let sneakerId = wishlist[i].id;
+          let sneakerData = await getSneakerData(sneakerId);
+
+          // Create a div for the sneaker
+          let sneakerDiv = document.createElement("div");
+          sneakerDiv.className = "sneaker";
+
+          // Create an img element for the sneaker image
+          let sneakerImg = document.createElement("img");
+          sneakerImg.src = sneakerData.attributes.image.small;
+          sneakerDiv.appendChild(sneakerImg);
+
+          // Create a p element for the sneaker text
+          let sneakerText = document.createElement("p");
+          sneakerText.textContent = sneakerData.attributes.silhouette; // Mettez ici le nom ou les informations que vous souhaitez afficher
+          sneakerDiv.appendChild(sneakerText);
+
+          // Create a button to remove the sneaker from the wishlist
+          let removeButton = document.createElement("button");
+          removeButton.className = "removeButton";
+          removeButton.textContent = "Effacer de la wishlist";
+          removeButton.addEventListener("click", function() {
+              removeFromWishlist(accountId, sneakerId);
+
+              // Remove the sneaker div from the wishlist div
+              wishlistDiv.removeChild(sneakerDiv);
+          });
+          sneakerDiv.appendChild(removeButton);
+
+          // Add the sneaker div to the wishlist div
+          wishlistDiv.appendChild(sneakerDiv);
+      }
+  };
+
+  async function getWishlist(accountId) {
+      try {
+          const response = await fetch(`http://127.0.0.1:3072/wishlist/${accountId}`);
+          if (!response.ok) {
+              throw new Error(`Error fetching wishlist: ${response.statusText}`);
+          }
+
+          return await response.json();
+      } catch (error) {
+          console.error('Error getting wishlist:', error);
+          return [];
+      }
+  }
+  async function getSneakerData(sneakerId) {
+    try {
+      
+      const response = await fetch(`http://127.0.0.1:3072/wishlist/${sneakerId}`); // Mettez votre URL correcte pour obtenir les données de la sneaker
+        const sneakerData = await response.json();
+
+        // Recherche de la sneaker par ID dans les données
+        console.log('sneakerData:', sneakerData);
+        const foundSneaker = sneakerData.find(sneaker => sneaker.id === sneakerId);
+        
+        if (foundSneaker) {
+            return {
+                attributes: {
+                    image: {
+                        small: foundSneaker.image
+                    },
+                    silhouette: foundSneaker.silhouette
+                }
+            };
+        } else {
+            throw new Error(`Sneaker with ID ${sneakerId} not found.`);
+        }
+    } catch (error) {
+        console.error('Error getting sneaker data:', error.message);
+        throw error; // Propagez l'erreur pour qu'elle soit gérée dans la fonction appelante
+    }
+}
+
+function removeFromWishlist(accountId, sneakerId) {
+    // Construire l'URL de la requête DELETE
+    console.log('accountId:', accountId);
+    console.log('sneakerId:', sneakerId);
+    const url = `http://127.0.0.1:3072/wishlist/${accountId}/sneakers/${sneakerId}`;
+
+    // Envoyer une requête DELETE au serveur
+    fetch(url, {
+        method: 'DELETE',
+    })
+    .then(response => {
+        if (response.ok) {
+            console.log(`Sneaker with ID ${sneakerId} removed from wishlist for account ${accountId}`);
+        } else {
+            console.error('Error removing sneaker from wishlist:', response.statusText);
+        }
+    })
+    .catch(error => console.error('Error removing sneaker from wishlist:', error));
+}
+
+    
+  </script>
+</html>

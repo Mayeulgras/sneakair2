@@ -25,7 +25,7 @@ function rechercheMAJ() {
 
 
 function chargerJsonData(recherche, idS) {
-  $.getJSON("http://127.0.0.1:3072/", function (jsondata) {
+  $.getJSON("http://127.0.0.1:3072/recherche", function (jsondata) {
     filteredData = searchByName(jsondata, recherche);
     printData(filteredData);
 
@@ -46,6 +46,7 @@ function searchByName(jsondata, searchTerm) {
   const filteredData = jsondata.filter((item) =>
     item.attributes.silhouette.toLowerCase().includes(lowerCaseSearchTerm)
   );
+  
 
   return filteredData;
 }
@@ -81,9 +82,14 @@ function printData(jsondata) {
 
         let accountId = "testAccount";
         let addToWishlistButton = document.createElement("button");
+        addToWishlistButton.className = "addToWishlistButton";
         addToWishlistButton.textContent = "Ajouter à la wishlist";
         addToWishlistButton.addEventListener("click", function() {
-          addToWishlist(accountId, sneaker.id);
+          if (sneaker && sneaker.attributes && sneaker.attributes.image) {
+            addToWishlist(accountId, sneaker);
+        } else {
+            console.error("Les informations de la sneaker sont manquantes ou incorrectes.");
+        }
         });
         document.getElementById("showWishlist").addEventListener("click", function() {
           window.location.href = "wishlist.html";
@@ -122,6 +128,35 @@ function printData(jsondata) {
     //   });
   }
 }
+let accountId = "testAccount";
+
+function addToWishlist(accountId, sneaker) {
+  
+  const sneakerToAdd = {
+      id: sneaker.id,
+      image: sneaker.attributes.image.small,
+      silhouette: sneaker.attributes.silhouette,
+      // ... autres propriétés de la sneaker
+  };
+
+  fetch('http://127.0.0.1:3072/wishlist', {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(sneakerToAdd),
+  })
+  .then(response => {
+      if (response.ok) {
+          console.log('Sneaker ajoutée à la wishlist avec succès.');
+      } else {
+          console.error('Erreur lors de l\'ajout à la wishlist:', response.statusText);
+      }
+  })
+  .catch(error => console.error('Error adding to wishlist:', error));
+}
+
+
 
 
 
@@ -129,6 +164,7 @@ function printData(jsondata) {
 function inserInformation(sneaker) {
   // creation de l'image du film
   var img = document.createElement("img");
+  img.className = "imageFilm";
   // on met le chemin de l'image
   img.src = sneaker.attributes.image.small;
   // si l'image s'affiche pas on met le titre

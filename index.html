@@ -9,22 +9,23 @@
     <link   rel="stylesheet" type="text/css" href="style.css" />          <!-- Mise en forme de la page HTML -->
   </head>
   <body>
-    <button onclick="window.location.href='login.html';" class="favorite styled" type="button">Login</button>
+    <button onclick="window.location.href='login.html';" class="login" type="button">Login</button>
 
     <!-- titre du site -->
-    <h1>SNEAKER</h1>
+    <h1>UrbanKicks Market</h1>
      <div class="form">
-      <button onclick="window.location.href='produit.html?idS=random';" class="favorite styled" type="button">Vous ne savez pas quelle paire vous préférez ?</button>     
+      <button onclick="window.location.href='produit.html?idS=random';" class="favorite" type="button">Vous ne savez pas quelle paire vous préférez ?</button>     
       <p>
         <!--barre de recherche-->
         <input  type="text" name="recherche" id="recherche" onKeyUp="rechercheMAJ()" autocomplete="off" placeholder="Rechercher"/>  
+        
       </p> 
       <button id="showWishlist">Montrer la wishlist</button>   
     </div>
     <!-- affichage des sagas qui sont chargées en javascript -->
     <div id="PAIRES">
-      <button id="previous">Précédent</button>
-      <button id="next">Suivant</button>
+      <button id="previous">Page précédente</button>
+      <button id="next">Page suivant</button>
     </div> 
     
   </body> 

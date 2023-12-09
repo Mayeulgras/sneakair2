@@ -1,3 +1,5 @@
+
+
 .infoDiv {
     width: 10%;
     top: 0;
@@ -20,11 +22,20 @@
     margin: 5px; /* Added margin-right for spacing */
 }
 
-#recherche{
+#recherche {
     width: 50%;
-    border: 1px solid #000000;
-    border-radius: 4px;
-    box-sizing: borderrgb(0, 0, 0)
+    border: none;
+    border-radius: 20px;
+    background-color: #f2f2f2;
+    padding: 10px;
+    font-size: 16px;
+    color: #333;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#recherche:focus {
+    outline: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .form {
@@ -32,14 +43,24 @@
     
 }
 h1 {
-    color: red;
+    color: rgb(49, 47, 47);
     text-align: center;
     font-size: 100px;
-    font-family: "filmo";
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    font-family: Arial, sans-serif;
 }
 
 .information{
     font-size: 20px;
+    color: #333;
+    font-weight: bold;
+}
+
+.information span {
+    color: #45a049;
+    margin-left: 10px;
 }
 
 #brand {
@@ -47,13 +68,42 @@ h1 {
 }
 
 .vignette {
-    width: 198px;
+    width: 180px;
     max-width: 200px;
     padding: 20px;
     display: inline-block;
     vertical-align: middle;
     border-radius: 7px;
-    border: 1px solid #000000;
+    border: 1px solid #595757;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    background-color: #f2f2f2;
+    transition: transform 0.3s ease;
+}
+
+.vignette:hover {
+    transform: scale(1.05);
+}
+   
+
+.vignette img {
+    max-width: 100%;
+}
+
+.sneaker {
+    width: 180px;
+    max-width: 200px;
+    padding: 20px;
+    display: inline-block;
+    vertical-align: middle;
+    border-radius: 7px;
+    border: 1px solid #595757;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    background-color: #f2f2f2;
+    transition: transform 0.3s ease;
+}
+
+.sneaker:hover {
+    transform: scale(1.05);
 }
    
 
@@ -62,9 +112,208 @@ h1 {
 }
 
 
+#showWishlist {
+    background-color: #546254;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#showWishlist:hover {
+    background-color: #45a049;
+}
+
+.favorite {
+    background-color: #546254;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.favorite:hover {
+    background-color: #45a049;
+}
+
+.login {
+    background-color: #546254;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.login:hover {
+    background-color: #45a049;
+}
+
+#previous {
+    background-color: #546254;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#previous:hover {
+    background-color: #45a049;
+}
+
+#next {
+    background-color: #546254;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#next:hover {
+    background-color: #45a049;
+}
+
+.addToWishlistButton {
+    background-color: #546254;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.addToWishlistButton:hover {
+    background-color: #d9240d;
+}
+
+.removeButton {
+    background-color: #546254;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.removeButton:hover {
+    background-color: #d9240d;
+    transition: background-color 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* BEGIN: UX/UI */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.navbar {
+    background-color: #546254;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+/* END: UX/UI */
 
 
-    
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
 
+.header {
+    text-align: center;
+    margin-bottom: 40px;
+}
 
+.navbar {
+    background-color: #546254;
+    padding: 10px;
+    margin-bottom: 20px;
+}
 
+.navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+.navbar li {
+    margin-right: 20px;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    transition: color 0.3s ease;
+}
+
+.navbar a:hover {
+    color: #45a049;
+}
+
+.footer {
+    text-align: center;
+    margin-top: 40px;
+    padding: 20px;
+    background-color: #f2f2f2;
+    border-top: 1px solid #595757;
+}
+
+/* END: UX/UI */
