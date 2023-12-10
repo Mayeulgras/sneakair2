@@ -64,6 +64,8 @@ app.get('/recherche', (req, res) => {
 });
 
 
+
+
 let wishlist = [];
 
 try {
@@ -145,6 +147,20 @@ function getWishlist(accountId) {
         return [];
     }
 }
+
+
+app.get('/sneakers', (req, res) => {
+    try {
+        const rawData = fs.readFileSync('all_data.json', 'utf8');
+        const allSneakers = JSON.parse(rawData);
+        res.json(allSneakers);
+    } catch (error) {
+        console.error('Error reading all_data.json:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+
+
 
 app.listen(port, () => {
     console.log(`Server running at http://127.0.0.1:${port}`);

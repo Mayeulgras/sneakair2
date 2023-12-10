@@ -1,3 +1,4 @@
+/* FILEPATH: /c:/Users/mayeu/OneDrive/Documents/GitHub/Epitech année 1 projet/sneakair2/style.css */
 
 
 .infoDiv {
@@ -68,7 +69,7 @@ h1 {
 }
 
 .vignette {
-    width: 180px;
+    width: 186px;
     max-width: 200px;
     padding: 20px;
     display: inline-block;
@@ -113,6 +114,7 @@ h1 {
 
 
 #showWishlist {
+    margin-bottom: 60px;
     background-color: #546254;
     color: white;
     border: none;
@@ -240,80 +242,3 @@ h1 {
     position: relative;
     overflow: hidden;
 }
-
-/* BEGIN: UX/UI */
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
-.header {
-    text-align: center;
-    margin-bottom: 40px;
-}
-
-.navbar {
-    background-color: #546254;
-    padding: 10px;
-    margin-bottom: 20px;
-}
-
-.navbar ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-}
-/* END: UX/UI */
-
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
-.header {
-    text-align: center;
-    margin-bottom: 40px;
-}
-
-.navbar {
-    background-color: #546254;
-    padding: 10px;
-    margin-bottom: 20px;
-}
-
-.navbar ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-}
-
-.navbar li {
-    margin-right: 20px;
-}
-
-.navbar a {
-    color: white;
-    text-decoration: none;
-    font-size: 16px;
-    transition: color 0.3s ease;
-}
-
-.navbar a:hover {
-    color: #45a049;
-}
-
-.footer {
-    text-align: center;
-    margin-top: 40px;
-    padding: 20px;
-    background-color: #f2f2f2;
-    border-top: 1px solid #595757;
-}
-
-/* END: UX/UI */

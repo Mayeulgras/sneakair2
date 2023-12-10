@@ -4,6 +4,8 @@
     <meta charset="utf-8">                                                <!-- utilisatoin de l'encodage en utf-8 -->    
     <title>SNEAKER </title>  
     <script src="/jquery-3.3.1.min.js" type='text/javascript'></script>  <!-- chargement de mon code javascript --><!-- titre de la page html -->
+    <script src="/login.js" type='text/javascript'></script>  <!-- chargement de mon code javascript -->
+    
     <script src="/sneakereee.js" type='text/javascript'></script>  <!-- chargement de mon code javascript -->
     <script src="all_data.json" type="application/json"></script>        <!-- cahrgement de mes données au format json -->
     <link   rel="stylesheet" type="text/css" href="style.css" />          <!-- Mise en forme de la page HTML -->
@@ -20,7 +22,7 @@
         <input  type="text" name="recherche" id="recherche" onKeyUp="rechercheMAJ()" autocomplete="off" placeholder="Rechercher"/>  
         
       </p> 
-      <button id="showWishlist">Montrer la wishlist</button>   
+      <button id="showWishlist">Montrer ma wishlist</button>   
     </div>
     <!-- affichage des sagas qui sont chargées en javascript -->
     <div id="PAIRES">
@@ -32,11 +34,28 @@
   <!-- <script src="wishlist.js"></script> -->
   <script>
 
+
+
+    
     // Quand la page HTML est chargée
     window.onload = function(){  
       displayAllSneakers();
-    
-      // firstR();
+
+      function checkAuthentication() {
+    const loggedInCookie = document.cookie.split(';').find(cookie => cookie.trim().startsWith('loggedIn='));
+
+    if (loggedInCookie) {
+        // L'utilisateur est authentifié
+        console.log('L\'utilisateur est authentifié.');
+    } else {
+        // L'utilisateur n'est pas authentifié, redirigez-le vers la page de connexion
+        console.log('L\'utilisateur n\'est pas authentifié.');
+        window.location.href = 'login.html';
+    }
+}
+
+// Appelez cette fonction sur chaque page où vous devez vérifier l'authentification
+checkAuthentication();
     }
     
   </script>

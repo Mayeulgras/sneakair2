@@ -80,7 +80,7 @@ function printData(jsondata) {
         // console.log(sneaker.attributes.image.original);
         img.src = sneaker.attributes.image.small;
 
-        let accountId = "testAccount";
+        let accountId = "user1";
         let addToWishlistButton = document.createElement("button");
         addToWishlistButton.className = "addToWishlistButton";
         addToWishlistButton.textContent = "Ajouter à la wishlist";
@@ -128,8 +128,7 @@ function printData(jsondata) {
     //   });
   }
 }
-let accountId = "testAccount";
-
+let accountId = "user1";
 function addToWishlist(accountId, sneaker) {
   
   const sneakerToAdd = {
