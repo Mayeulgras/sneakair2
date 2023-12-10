@@ -143,7 +143,7 @@
           // Create an img element for the sneaker image
           let sneakerImg = document.createElement("img");
           sneakerImg.src = sneakerData.attributes.image.small;
-          if (sneakerData.attributes.image.small == "true") {
+          if (sneakerData.attributes.image.small == "true" | sneakerData.attributes.image.small == "false" | sneakerData.attributes.image.small == "[]" | sneakerData.attributes.image.small == "" | sneakerData.attributes.image.small == "undefined") {
             sneakerImg.src = "p.jpg";
           }
           sneakerDiv.appendChild(sneakerImg);

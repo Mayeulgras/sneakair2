@@ -65,7 +65,7 @@ function printData(jsondata) {
         // Définir le src de l'img à l'URL de l'image de la sneaker
         // console.log(sneaker.attributes.image.original);
         img.src = sneaker.attributes.image.small;
-        if (sneaker.attributes.image.small == "true") {
+        if (sneaker.attributes.image.small == "true" | sneaker.attributes.image.small == "false" | sneaker.attributes.image.small == "[]" | sneaker.attributes.image.small == "" | sneaker.attributes.image.small == "undefined") {
           img.src = "p.jpg";
         }
         let accountId = "user1";
@@ -155,7 +155,7 @@ function inserInformation(sneaker) {
   img.className = "imageFilm";
   // on met le chemin de l'image
   img.src = sneaker.attributes.image.small;
-  if (sneaker.attributes.image.small == "true") {
+  if (sneaker.attributes.image.small == "true" | sneaker.attributes.image.small == "false" | sneaker.attributes.image.small == "[]" | sneaker.attributes.image.small == "" | sneaker.attributes.image.small == "undefined") {
     img.src = "p.jpg";
   }
   // si l'image s'affiche pas on met le titre

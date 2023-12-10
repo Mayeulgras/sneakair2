@@ -55,7 +55,7 @@ app.get('/recherche', (req, res) => {
 
         // Filtrer les produits en fonction du terme de recherche
         const resultat = chaussures.filter(u => u.attributes.silhouette.toLowerCase().includes(termeRecherche.toLowerCase()));
-        const itemsPerPage = req.query.itemsPerPage || 300;
+        const itemsPerPage = req.query.itemsPerPage || 77;
         const page = req.query.page || 1;
         const startIndex = (page - 1) * itemsPerPage;
         const endIndex = startIndex + itemsPerPage;
