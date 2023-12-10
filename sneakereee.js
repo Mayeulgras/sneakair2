@@ -1,7 +1,4 @@
-
-
 let filteredData = null;
-
 
 function rechercheMAJ() {
   var champRecherche = document.getElementById("recherche");
@@ -9,32 +6,22 @@ function rechercheMAJ() {
   document.getElementById("PAIRES").innerHTML = "";
 
   chargerJsonData(recherche);
-  //recuperer la page n de filteredData
   printData(filteredData);
 }
-// function firstR() {
-//   chargerJsonData("");
-//   //recuperer la page n de filteredData
-//   printData(filteredData);
-
-
-// }
-
-
-
 
 
 function chargerJsonData(recherche, idS) {
-  $.getJSON("http://127.0.0.1:3072/recherche", function (jsondata) {
-    filteredData = searchByName(jsondata, recherche);
-    printData(filteredData);
+  $.getJSON(`http://127.0.0.1:3072/recherche?silhouette=${recherche}&page=${currentPage}`, function (jsondata) {
+    // filteredData = searchByName(jsondata, recherche);
+    printData(jsondata);
 
-    printS(idS, jsondata);
+    // printS(idS, jsondata);
   });
 }
+
+
 function displayAllSneakers() {
   chargerJsonData("");
-  printData(filteredData);
 }
 
 
@@ -46,7 +33,6 @@ function searchByName(jsondata, searchTerm) {
   const filteredData = jsondata.filter((item) =>
     item.attributes.silhouette.toLowerCase().includes(lowerCaseSearchTerm)
   );
-  
 
   return filteredData;
 }
@@ -69,7 +55,7 @@ function printData(jsondata) {
     // console.log(jsondata);
     if (Array.isArray(jsondata)) {
       //   jsondata.forEach((sneakertab) => {
-        jsondata.forEach((sneaker) => {
+      jsondata.forEach((sneaker) => {
         // const sneaker = sneakertab.data[0];
         // console.log(sneaker);
         var table = document.createElement("table");
@@ -79,21 +65,27 @@ function printData(jsondata) {
         // Définir le src de l'img à l'URL de l'image de la sneaker
         // console.log(sneaker.attributes.image.original);
         img.src = sneaker.attributes.image.small;
-
+        if (sneaker.attributes.image.small == "true") {
+          img.src = "p.jpg";
+        }
         let accountId = "user1";
         let addToWishlistButton = document.createElement("button");
         addToWishlistButton.className = "addToWishlistButton";
         addToWishlistButton.textContent = "Ajouter à la wishlist";
-        addToWishlistButton.addEventListener("click", function() {
+        addToWishlistButton.addEventListener("click", function () {
           if (sneaker && sneaker.attributes && sneaker.attributes.image) {
             addToWishlist(accountId, sneaker);
-        } else {
-            console.error("Les informations de la sneaker sont manquantes ou incorrectes.");
-        }
+          } else {
+            console.error(
+              "Les informations de la sneaker sont manquantes ou incorrectes."
+            );
+          }
         });
-        document.getElementById("showWishlist").addEventListener("click", function() {
-          window.location.href = "wishlist.html";
-        });
+        document
+          .getElementById("showWishlist")
+          .addEventListener("click", function () {
+            window.location.href = "wishlist.html";
+          });
 
         // Ajouter l'élément img à l'élément container
         PAIRES.appendChild(img);
@@ -130,35 +122,32 @@ function printData(jsondata) {
 }
 let accountId = "user1";
 function addToWishlist(accountId, sneaker) {
-  
   const sneakerToAdd = {
-      id: sneaker.id,
-      image: sneaker.attributes.image.small,
-      silhouette: sneaker.attributes.silhouette,
-      // ... autres propriétés de la sneaker
+    id: sneaker.id,
+    image: sneaker.attributes.image.small,
+    silhouette: sneaker.attributes.silhouette,
+    // ... autres propriétés de la sneaker
   };
 
-  fetch('http://127.0.0.1:3072/wishlist', {
-      method: 'POST',
-      headers: {
-          'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(sneakerToAdd),
+  fetch("http://127.0.0.1:3072/wishlist", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(sneakerToAdd),
   })
-  .then(response => {
+    .then((response) => {
       if (response.ok) {
-          console.log('Sneaker ajoutée à la wishlist avec succès.');
+        console.log("Sneaker ajoutée à la wishlist avec succès.");
       } else {
-          console.error('Erreur lors de l\'ajout à la wishlist:', response.statusText);
+        console.error(
+          "Erreur lors de l'ajout à la wishlist:",
+          response.statusText
+        );
       }
-  })
-  .catch(error => console.error('Error adding to wishlist:', error));
+    })
+    .catch((error) => console.error("Error adding to wishlist:", error));
 }
-
-
-
-
-
 
 function inserInformation(sneaker) {
   // creation de l'image du film
@@ -166,6 +155,9 @@ function inserInformation(sneaker) {
   img.className = "imageFilm";
   // on met le chemin de l'image
   img.src = sneaker.attributes.image.small;
+  if (sneaker.attributes.image.small == "true") {
+    img.src = "p.jpg";
+  }
   // si l'image s'affiche pas on met le titre
   // pousse l'image dans la div qui a pour id imageFilm
   document.getElementById("SneakerImg").appendChild(img);
@@ -183,15 +175,23 @@ function inserInformation(sneaker) {
   document.getElementById("gender").appendChild(gender);
 
   //crée un element texte qui contient le par
-  var estimatedMarketValue = document.createTextNode("Prix estimé : " + sneaker.attributes.estimatedMarketValue + "€");
-  document.getElementById("estimatedMarketValue").appendChild(estimatedMarketValue);
+  var estimatedMarketValue = document.createTextNode(
+    "Prix estimé : " + sneaker.attributes.estimatedMarketValue + "€"
+  );
+  document
+    .getElementById("estimatedMarketValue")
+    .appendChild(estimatedMarketValue);
 
   //crée un element texte qui contient le avec
-  var retailPrice = document.createTextNode("Prix de vente : " + sneaker.attributes.retailPrice + "€");
+  var retailPrice = document.createTextNode(
+    "Prix de vente : " + sneaker.attributes.retailPrice + "€"
+  );
   document.getElementById("retailPrice").appendChild(retailPrice);
 
   //crée un element texte qui contient le synopsis
-  var releaseYear = document.createTextNode("Année de sortie : " + sneaker.attributes.releaseYear);
+  var releaseYear = document.createTextNode(
+    "Année de sortie : " + sneaker.attributes.releaseYear
+  );
   document.getElementById("releaseYear").appendChild(releaseYear);
 }
 
@@ -214,21 +214,11 @@ function printS(idS, jsondata) {
   }
 }
 
-
-
 async function getSneakerData(sneakerId) {
   // Replace 'url-to-your-api' with the URL of your API
-  let response = await fetch('all_data.json');
+  let response = await fetch("all_data.json");
   let jsondata = await response.json();
 
-  let sneakerData = jsondata.find(sneaker => sneaker.id === sneakerId);
+  let sneakerData = jsondata.find((sneaker) => sneaker.id === sneakerId);
   return sneakerData;
 }
-
-
-
-
-
-
-
-

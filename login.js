@@ -22,3 +22,28 @@ async function login() {
         alert('Error fetching accounts. Please try again later.');
     }
 }
+
+// document.getElementById('loginForm').addEventListener('submit', function (event) {
+//     event.preventDefault(); // Empêche le comportement par défaut du formulaire
+
+//     const formData = new FormData(this);
+
+//     fetch('/login', {
+//         method: 'POST',
+//         body: formData,
+//     })
+//     .then(response => {
+//         if (response.ok) {
+//             // Utilisateur connecté
+//             return response.json();
+//         } else {
+//             // Utilisateur non connecté
+//             throw new Error('Unauthorized');
+//         }
+//     })
+//     .then(data => {
+//         localStorage.setItem('userGUID', data);
+//         // Affichez la réponse dans un élément sur votre page
+//     })
+//     .catch(error => console.error('Erreur lors de la requête POST:', error));
+// });

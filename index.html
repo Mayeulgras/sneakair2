@@ -25,16 +25,31 @@
       <button id="showWishlist">Montrer ma wishlist</button>   
     </div>
     <!-- affichage des sagas qui sont chargées en javascript -->
-    <div id="PAIRES">
+    <div id="pagination">
       <button id="previous">Page précédente</button>
       <button id="next">Page suivant</button>
     </div> 
+    <div id="PAIRES"></div> 
     
   </body> 
   <!-- <script src="wishlist.js"></script> -->
   <script>
 
+    let currentPage = 1;
 
+    // Écouter les clics sur le bouton "Page suivante"
+    document.getElementById('next').addEventListener('click', () => {
+        currentPage++;
+        rechercheMAJ();
+    });
+
+    // Écouter les clics sur le bouton "Page précédente"
+    document.getElementById('previous').addEventListener('click', () => {
+        if (currentPage > 1) {
+            currentPage--;
+            rechercheMAJ();
+        }
+    });
 
     
     // Quand la page HTML est chargée

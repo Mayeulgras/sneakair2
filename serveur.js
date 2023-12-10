@@ -48,18 +48,20 @@ app.get('/recherche', (req, res) => {
             return;
         }
 
-        const utilisateurs = JSON.parse(data);
+        const chaussures = JSON.parse(data);
 
         // Si le terme de recherche est vide, renvoie tous les produits
-        if (!termeRecherche) {
-            res.json(utilisateurs);
-            return;
-        }
+       
 
         // Filtrer les produits en fonction du terme de recherche
-        const resultat = utilisateurs.filter(u => u.attributes.silhouette.toLowerCase().includes(termeRecherche.toLowerCase()));
-
-        res.json(resultat);
+        const resultat = chaussures.filter(u => u.attributes.silhouette.toLowerCase().includes(termeRecherche.toLowerCase()));
+        const itemsPerPage = req.query.itemsPerPage || 300;
+        const page = req.query.page || 1;
+        const startIndex = (page - 1) * itemsPerPage;
+        const endIndex = startIndex + itemsPerPage;
+        const sneakersForPage = resultat.slice(startIndex, endIndex);
+        res.json(sneakersForPage);
+        
     });
 });
 
@@ -159,6 +161,34 @@ app.get('/sneakers', (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
+
+app.post('/login', (req, res) => {
+    const username = req.query.username; // Récupère le terme de recherche de l'URL
+    const password = req.query.password; // Récupère le terme de recherche de l'URL
+    fs.readFile('login.json', 'utf8', (err, data) => {
+        if (err) {
+            res.status(500).send('Erreur lors de la lecture du fichier');
+            return;
+        }
+
+        const utilisateurs = JSON.parse(data);
+
+        // Filtrer les produits en fonction du terme de recherche
+        const resultat = utilisateurs.filter(u => u.login.toLowerCase() == username.toLowerCase() && u.password.toLowerCase() == password.toLowerCase());
+        if (resultat.length == 0) {
+            res.status(401).send('Erreur lors de la connexion');
+            return;
+        }else if (resultat.length == 1) {
+            res.status(200).send('Connexion réussi');
+            guid = "10000000-1000-4000-8000-100000000000".replace(/[018]/g, c =>
+                  (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+                );
+            fs.writeFileSync('guid.json', JSON.stringify(guid));
+            return guid;
+        }
+    });
+});
+
 
 
 

@@ -143,6 +143,9 @@
           // Create an img element for the sneaker image
           let sneakerImg = document.createElement("img");
           sneakerImg.src = sneakerData.attributes.image.small;
+          if (sneakerData.attributes.image.small == "true") {
+            sneakerImg.src = "p.jpg";
+          }
           sneakerDiv.appendChild(sneakerImg);
 
           // Create a p element for the sneaker text

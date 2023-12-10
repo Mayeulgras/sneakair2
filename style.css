@@ -10,6 +10,8 @@
 
 #PAIRES img{
     max-width: 100%;
+    min-height: 186px;
+
 }
 
 .vignette{
@@ -88,6 +90,8 @@ h1 {
 
 .vignette img {
     max-width: 100%;
+    min-height: 186px;
+
 }
 
 .sneaker {
@@ -108,8 +112,10 @@ h1 {
 }
    
 
-.vignette img {
+.sneaker img {
     max-width: 100%;
+    min-height: 210px;
+
 }
 
 
