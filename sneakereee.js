@@ -1,5 +1,4 @@
 let filteredData = null;
-
 function rechercheMAJ() {
   var champRecherche = document.getElementById("recherche");
   var recherche = champRecherche.value;
@@ -68,10 +67,11 @@ function printData(jsondata) {
         if (sneaker.attributes.image.small == "true" | sneaker.attributes.image.small == "false" | sneaker.attributes.image.small == "[]" | sneaker.attributes.image.small == "" | sneaker.attributes.image.small == "undefined") {
           img.src = "p.jpg";
         }
-        let accountId = "user1";
+
+        // let accountId = "u1";
         let addToWishlistButton = document.createElement("button");
         addToWishlistButton.className = "addToWishlistButton";
-        addToWishlistButton.textContent = "Ajouter à la wishlist";
+        addToWishlistButton.textContent = "Ajouter à wishlist";
         addToWishlistButton.addEventListener("click", function () {
           if (sneaker && sneaker.attributes && sneaker.attributes.image) {
             addToWishlist(accountId, sneaker);
@@ -87,6 +87,24 @@ function printData(jsondata) {
             window.location.href = "wishlist.html";
           });
 
+          let addToCollectionButton = document.createElement("button");
+        addToCollectionButton.className = "addToCollectionButton";
+        addToCollectionButton.textContent = "Ajouter à collection";
+        addToCollectionButton.addEventListener("click", function () {
+          if (sneaker && sneaker.attributes && sneaker.attributes.image) {
+            addToCollection(accountId, sneaker);
+          } else {
+            console.error(
+              "Les informations de la sneaker sont manquantes ou incorrectes."
+            );
+          }
+        });
+        document
+          .getElementById("showCollection")
+          .addEventListener("click", function () {
+            window.location.href = "collection.html";
+          });
+
         // Ajouter l'élément img à l'élément container
         PAIRES.appendChild(img);
         var a = document.createElement("a");
@@ -99,13 +117,14 @@ function printData(jsondata) {
         let name = document.createElement("p");
         name.innerHTML = sneaker.attributes.silhouette;
 
-        var div = document.createElement("div");
+        var div = document.createElement("li");
         //la div a une class css qui s'appelle vignette
         div.className = "vignette";
         //on rajoute dans la div le lien qui est image
         div.appendChild(a);
         div.appendChild(name);
         div.appendChild(addToWishlistButton);
+        div.appendChild(addToCollectionButton);
         // dans la cellule film on rajouta la div
         celluleData.appendChild(div);
         //   rajout de la cellule contenant tous les films
@@ -120,7 +139,8 @@ function printData(jsondata) {
     //   });
   }
 }
-let accountId = "user1";
+let storedUsername = localStorage.getItem("storedUsername");
+let accountId = storedUsername;
 function addToWishlist(accountId, sneaker) {
   const sneakerToAdd = {
     id: sneaker.id,
@@ -129,7 +149,7 @@ function addToWishlist(accountId, sneaker) {
     // ... autres propriétés de la sneaker
   };
 
-  fetch("http://127.0.0.1:3072/wishlist", {
+  fetch("http://127.0.0.1:3072/wishlist/${accountId}", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -148,6 +168,36 @@ function addToWishlist(accountId, sneaker) {
     })
     .catch((error) => console.error("Error adding to wishlist:", error));
 }
+
+function addToCollection(accountId, sneaker) {
+  const sneakerToAdd = {
+    id: sneaker.id,
+    image: sneaker.attributes.image.small,
+    silhouette: sneaker.attributes.silhouette,
+    // ... autres propriétés de la sneaker
+  };
+
+  fetch("http://127.0.0.1:3072/collection/${accountId}", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(sneakerToAdd),
+  })
+    .then((response) => {
+      if (response.ok) {
+        console.log("Sneaker ajoutée à la collection avec succès.");
+      } else {
+        console.error(
+          "Erreur lors de l'ajout à la collection:",
+          response.statusText
+        );
+      }
+    })
+    .catch((error) => console.error("Error adding to collection:", error));
+}
+
+
 
 function inserInformation(sneaker) {
   // creation de l'image du film

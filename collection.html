@@ -14,12 +14,12 @@
     <button onclick="window.location.href='index.html';" class="favorite styled" type="button">Retour</button>
 
     <!-- titre du site -->
-    <h1>Your Sneaker </br> Wishlist</h1>
+    <h1>Your Sneaker </br> Collection</h1>
      <div class="form">
        
     </div>
     <!-- affichage des sagas qui sont chargées en javascript -->
-    <div id="wishlist"></div> 
+    <div id="collection"></div> 
     
   </body> 
   <script>
@@ -127,12 +127,13 @@
 // };
 
 // let accountId = "testAccount";
-  window.onload = async function() {
-      let wishlist = await getWishlist(accountId);
-      let wishlistDiv = document.getElementById("wishlist");
 
-      for (let i = 0; i < wishlist.length; i++) {
-          let sneakerId = wishlist[i].id;
+  window.onload = async function() {
+      let collection = await getCollection(accountId);
+      let collectionDiv = document.getElementById("collection");
+
+      for (let i = 0; i < collection.length; i++) {
+          let sneakerId = collection[i].id;
           let sneakerData = await getSneakerData(sneakerId);
 
           // Create a div for the sneaker
@@ -155,37 +156,37 @@
           // Create a button to remove the sneaker from the wishlist
           let removeButton = document.createElement("button");
           removeButton.className = "removeButton";
-          removeButton.textContent = "Effacer de la wishlist";
+          removeButton.textContent = "Effacer de la collection";
           removeButton.addEventListener("click", function() {
-              removeFromWishlist(accountId, sneakerId);
+              removeFromCollection(accountId, sneakerId);
 
               // Remove the sneaker div from the wishlist div
-              wishlistDiv.removeChild(sneakerDiv);
+              collectionDiv.removeChild(sneakerDiv);
           });
           sneakerDiv.appendChild(removeButton);
 
           // Add the sneaker div to the wishlist div
-          wishlistDiv.appendChild(sneakerDiv);
+          collectionDiv.appendChild(sneakerDiv);
       }
   };
 
-  async function getWishlist(accountId) {
+  async function getCollection(accountId) {
       try {
-          const response = await fetch(`http://127.0.0.1:3072/wishlist/${accountId}`);
+          const response = await fetch(`http://127.0.0.1:3072/collection/${accountId}`);
           if (!response.ok) {
-              throw new Error(`Error fetching wishlist: ${response.statusText}`);
+              throw new Error(`Error fetching collection: ${response.statusText}`);
           }
 
           return await response.json();
       } catch (error) {
-          console.error('Error getting wishlist:', error);
+          console.error('Error getting collection:', error);
           return [];
       }
   }
   async function getSneakerData(sneakerId) {
     try {
       
-      const response = await fetch(`http://127.0.0.1:3072/wishlist/${sneakerId}`); // Mettez votre URL correcte pour obtenir les données de la sneaker
+      const response = await fetch(`http://127.0.0.1:3072/collection/${sneakerId}`); // Mettez votre URL correcte pour obtenir les données de la sneaker
         const sneakerData = await response.json();
 
         // Recherche de la sneaker par ID dans les données
@@ -210,11 +211,11 @@
     }
 }
 
-function removeFromWishlist(accountId, sneakerId) {
+function removeFromCollection(accountId, sneakerId) {
     // Construire l'URL de la requête DELETE
     console.log('accountId:', accountId);
     console.log('sneakerId:', sneakerId);
-    const url = `http://127.0.0.1:3072/wishlist/${accountId}/sneakers/${sneakerId}`;
+    const url = `http://127.0.0.1:3072/collection/${accountId}/sneakers/${sneakerId}`;
 
     // Envoyer une requête DELETE au serveur
     fetch(url, {
@@ -222,12 +223,12 @@ function removeFromWishlist(accountId, sneakerId) {
     })
     .then(response => {
         if (response.ok) {
-            console.log(`Sneaker with ID ${sneakerId} removed from wishlist for account ${accountId}`);
+            console.log(`Sneaker with ID ${sneakerId} removed from collection for account ${accountId}`);
         } else {
-            console.error('Error removing sneaker from wishlist:', response.statusText);
+            console.error('Error removing sneaker from collection:', response.statusText);
         }
     })
-    .catch(error => console.error('Error removing sneaker from wishlist:', error));
+    .catch(error => console.error('Error removing sneaker from collection:', error));
 }
 
     

@@ -2,8 +2,9 @@
 
 async function login() {
     const username = document.getElementById('username').value;
+    localStorage.setItem("storedUsername", username);
     const password = document.getElementById('password').value;
-
+    accountId = username;
     try {
         const response = await fetch('login.json');
         const accounts = await response.json();
