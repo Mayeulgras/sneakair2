@@ -55,7 +55,7 @@ app.get('/recherche', (req, res) => {
 
         // Filtrer les produits en fonction du terme de recherche
         const resultat = chaussures.filter(u => u.attributes.silhouette.toLowerCase().includes(termeRecherche.toLowerCase()));
-        const itemsPerPage = req.query.itemsPerPage || 77;
+        const itemsPerPage = req.query.itemsPerPage || 60;
         const page = req.query.page || 1;
         const startIndex = (page - 1) * itemsPerPage;
         const endIndex = startIndex + itemsPerPage;
@@ -78,13 +78,13 @@ try {
 }
 
 // Route pour ajouter une sneaker à la wishlist
+
+
 app.post('/wishlist/:accountId', (req, res) => {
     const sneakerToAdd = req.body;
-    const accountId = req.params.accountId
-
+    const accountId = req.query.accountId;
     // Vérifier si la sneaker est déjà dans la wishlist
     const existingSneaker = wishlist.find(s => s.id === sneakerToAdd.id);
-
     if (!existingSneaker) {
         wishlist.push(sneakerToAdd);
         // Enregistrer la wishlist dans le fichier JSON

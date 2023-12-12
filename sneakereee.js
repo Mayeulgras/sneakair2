@@ -67,6 +67,7 @@ function printData(jsondata) {
         if (sneaker.attributes.image.small == "true" | sneaker.attributes.image.small == "false" | sneaker.attributes.image.small == "[]" | sneaker.attributes.image.small == "" | sneaker.attributes.image.small == "undefined") {
           img.src = "p.jpg";
         }
+        img.alt = sneaker.attributes.name;
 
         // let accountId = "u1";
         let addToWishlistButton = document.createElement("button");
@@ -117,7 +118,7 @@ function printData(jsondata) {
         let name = document.createElement("p");
         name.innerHTML = sneaker.attributes.silhouette;
 
-        var div = document.createElement("li");
+        var div = document.createElement("article");
         //la div a une class css qui s'appelle vignette
         div.className = "vignette";
         //on rajoute dans la div le lien qui est image
@@ -139,8 +140,10 @@ function printData(jsondata) {
     //   });
   }
 }
-let storedUsername = localStorage.getItem("storedUsername");
-let accountId = storedUsername;
+// let storedUsername = localStorage.getItem("storedUsername");
+// let accountId = storedUsername;
+const accountId = localStorage.getItem("storedUsername");
+
 function addToWishlist(accountId, sneaker) {
   const sneakerToAdd = {
     id: sneaker.id,
@@ -149,7 +152,7 @@ function addToWishlist(accountId, sneaker) {
     // ... autres propriétés de la sneaker
   };
 
-  fetch("http://127.0.0.1:3072/wishlist/${accountId}", {
+  fetch(`http://127.0.0.1:3072/wishlist/${accountId}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -208,6 +211,7 @@ function inserInformation(sneaker) {
   if (sneaker.attributes.image.small == "true" | sneaker.attributes.image.small == "false" | sneaker.attributes.image.small == "[]" | sneaker.attributes.image.small == "" | sneaker.attributes.image.small == "undefined") {
     img.src = "p.jpg";
   }
+  img.alt = sneaker.attributes.name;
   // si l'image s'affiche pas on met le titre
   // pousse l'image dans la div qui a pour id imageFilm
   document.getElementById("SneakerImg").appendChild(img);
