@@ -151,8 +151,8 @@ function addToWishlist(accountId, sneaker) {
     silhouette: sneaker.attributes.silhouette,
     // ... autres propriétés de la sneaker
   };
-
-  fetch(`http://127.0.0.1:3072/wishlist/${accountId}`, {
+  const accountId2 = localStorage.getItem("storedUsername");
+  fetch(`http://127.0.0.1:3072/wishlist/${accountId2}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -179,8 +179,9 @@ function addToCollection(accountId, sneaker) {
     silhouette: sneaker.attributes.silhouette,
     // ... autres propriétés de la sneaker
   };
+  const accountId2 = localStorage.getItem("storedUsername");
 
-  fetch("http://127.0.0.1:3072/collection/${accountId}", {
+  fetch(`http://127.0.0.1:3072/collection/${accountId2}`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

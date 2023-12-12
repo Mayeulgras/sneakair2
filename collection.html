@@ -26,118 +26,17 @@
     
   </body> 
   <script>
-//     window.onload = async function() {
-//     let accountId = "testAccount";
-//     let wishlist = getWishlist(accountId);
-//     let wishlistDiv = document.getElementById("wishlist");
-//     for (let i = 0; i < wishlist.length; i++) {
-//         let sneakerId = wishlist[i];
-//         let sneakerData = await getSneakerData(sneakerId);
 
-//         // Create a div for the sneaker
-//         let sneakerDiv = document.createElement("div");
-//         sneakerDiv.className = "sneaker";
-
-
-//         // Create an img element for the sneaker image
-//         let sneakerImg = document.createElement("img");
-//         sneakerImg.src = sneakerData.attributes.image.small;
-//         sneakerDiv.appendChild(sneakerImg);
-        
-
-//         // Create a p element for the sneaker text
-//         let sneakerText = document.createElement("p");
-//         sneakerText.textContent = sneakerData.text;
-//         sneakerDiv.appendChild(sneakerText);
-
-//         // Create a button to remove the sneaker from the wishlist
-//         let removeButton = document.createElement("button");
-//         removeButton.textContent = "Effacer de la wishlist";
-//         removeButton.addEventListener("click", function() {
-//             removeFromWishlist(accountId, sneakerId);
-
-//             // Remove the sneaker div from the wishlist div
-//             wishlistDiv.removeChild(sneakerDiv);
-//         });
-//         sneakerDiv.appendChild(removeButton);
-
-//         // Add the sneaker div to the wishlist div
-//         wishlistDiv.appendChild(sneakerDiv);
-//     }
-// };
-
-// const fs = require('fs');
-
-// // Fonction pour récupérer la wishlist pour un compte spécifié
-// function getWishlist(accountId) {
-//     try {
-//         // Lire le fichier wishlist.json de manière synchrone
-//         const wishlistData = fs.readFileSync('wishlist.json', 'utf8');
-
-//         // Parse le contenu JSON pour obtenir un tableau d'identifiants de sneakers
-//         const wishlistArray = JSON.parse(wishlistData);
-
-//         // Vous pouvez ajouter des vérifications ou des filtres supplémentaires ici si nécessaire
-
-//         return wishlistArray;
-//     } catch (error) {
-//         console.error('Error reading wishlist file:', error);
-//         return []; // Retourne une liste vide en cas d'erreur
-//     }
-// }
-
-// // Exemple d'utilisation de la fonction
-// const wishlist = getWishlist(accountId);
-// console.log('Wishlist for', accountId, ':', wishlist);
-
-// window.onload = async function() {
-//     let accountId = "testAccount";
-//     let wishlist = getWishlist(accountId);
-//     let wishlistDiv = document.getElementById("wishlist");
-
-//     for (let i = 0; i < wishlist.length; i++) {
-//         let sneakerId = wishlist[i];
-//         let sneakerData = await getSneakerData(sneakerId);
-
-//         // Create a div for the sneaker
-//         let sneakerDiv = document.createElement("div");
-//         sneakerDiv.className = "sneaker";
-
-//         // Create an img element for the sneaker image
-//         let sneakerImg = document.createElement("img");
-//         sneakerImg.src = sneakerData.attributes.image.small;
-//         sneakerDiv.appendChild(sneakerImg);
-
-//         // Create a p element for the sneaker text
-//         let sneakerText = document.createElement("p");
-//         sneakerText.textContent = sneakerData.attributes.silhouette; // Mettez ici le nom ou les informations que vous souhaitez afficher
-//         sneakerDiv.appendChild(sneakerText);
-
-//         // Create a button to remove the sneaker from the wishlist
-//         let removeButton = document.createElement("button");
-//         removeButton.textContent = "Effacer de la wishlist";
-//         removeButton.addEventListener("click", function() {
-//             removeFromWishlist(accountId, sneakerId);
-
-//             // Remove the sneaker div from the wishlist div
-//             wishlistDiv.removeChild(sneakerDiv);
-//         });
-//         sneakerDiv.appendChild(removeButton);
-
-//         // Add the sneaker div to the wishlist div
-//         wishlistDiv.appendChild(sneakerDiv);
-//     }
-// };
-
-// let accountId = "testAccount";
 
   window.onload = async function() {
-      let collection = await getCollection(accountId);
+      const accountId3 = localStorage.getItem("storedUsername");
+
+      let collection = await getCollection(accountId3);
       let collectionDiv = document.getElementById("collection");
 
       for (let i = 0; i < collection.length; i++) {
           let sneakerId = collection[i].id;
-          let sneakerData = await getSneakerData(sneakerId);
+          let sneakerData = collection[i];
 
           // Create a div for the sneaker
           let sneakerDiv = document.createElement("div");
@@ -145,15 +44,15 @@
 
           // Create an img element for the sneaker image
           let sneakerImg = document.createElement("img");
-          sneakerImg.src = sneakerData.attributes.image.small;
-          if (sneakerData.attributes.image.small == "true" | sneakerData.attributes.image.small == "false" | sneakerData.attributes.image.small == "[]" | sneakerData.attributes.image.small == "" | sneakerData.attributes.image.small == "undefined") {
+          sneakerImg.src = sneakerData.image;
+          if (sneakerData.image == "true" | sneakerData.image == "false" | sneakerData.image == "[]" | sneakerData.image == "" | sneakerData.image == "undefined") {
             sneakerImg.src = "p.jpg";
           }
           sneakerDiv.appendChild(sneakerImg);
 
           // Create a p element for the sneaker text
           let sneakerText = document.createElement("p");
-          sneakerText.textContent = sneakerData.attributes.silhouette; // Mettez ici le nom ou les informations que vous souhaitez afficher
+          sneakerText.textContent = sneakerData.silhouette; // Mettez ici le nom ou les informations que vous souhaitez afficher
           sneakerDiv.appendChild(sneakerText);
 
           // Create a button to remove the sneaker from the wishlist
